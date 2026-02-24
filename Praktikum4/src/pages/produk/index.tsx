@@ -1,7 +1,8 @@
 const index = () => {
   return (
     <div>
-        produk:
+        {/*produk:*/}
+        <h1>Halaman Produk Cindy</h1>
     </div>
   );
 };
