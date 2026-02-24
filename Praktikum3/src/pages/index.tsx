@@ -8,7 +8,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    //Langkah 5 - Modifikasi Halaman Utama
     <div>
       <h1>Praktikum Next.js Pages Router Cindy</h1>
       <p>Mahasiswa d4 Pengembangan Web</p>
