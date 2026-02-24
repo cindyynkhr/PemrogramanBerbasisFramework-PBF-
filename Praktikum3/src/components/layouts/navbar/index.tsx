@@ -3,7 +3,15 @@ const Navbar = () => {
     <div className="navbar">
         <div>Navbar Component Cindy</div>
     </div>
-    );
+  );
 };
 
-export default Navbar;
+const Footer = () => {
+  return (
+    <div className="footer">
+      Footer Component @2341720058
+    </div>
+  );
+};
+
+export { Navbar, Footer };
