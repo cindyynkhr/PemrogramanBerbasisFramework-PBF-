@@ -6,7 +6,10 @@ const Produk = () => {
   const { push } = useRouter();
 
   useEffect(() => {
-    if (!isLogin) {
+    const status = localStorage.getItem("isLogin");
+    if (status === "true") {
+      setIsLogin(true);
+    } else {
       push("/auth/login");
     }
   }, []);
