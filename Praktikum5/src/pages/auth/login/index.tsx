@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import styles from './login.module.css';
+//import styles from './login.module.css';
+import styles from './login.module.scss';
 
 const HalamanLogin = () => {
-    const router = useRouter();
+    const { push } = useRouter();
     const handleLogin = () => {
-        router.push('/produk');
+        //logic login
+        push('/produk');
     };
     return (
         <div className={styles.login}>
