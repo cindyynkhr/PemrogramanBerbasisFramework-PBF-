@@ -7,6 +7,7 @@ const HalamanLogin = () => {
     const { push } = useRouter();
     const handleLogin = () => {
         //logic login
+        localStorage.setItem("isLogin", "true");
         push('/produk');
     };
     return (
