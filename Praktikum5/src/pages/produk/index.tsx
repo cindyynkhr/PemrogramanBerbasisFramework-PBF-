@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import HeroSection from "@/views/produk/HeroSection";
+import MainSection from "@/views/produk/MainSection";
 
 const Produk = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -17,7 +19,7 @@ const Produk = () => {
   }, [router]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="flex items-center justify-center h-screen text-lg">Loading...</div>;
   }
 
   if (!isLogin) {
@@ -30,10 +32,9 @@ const Produk = () => {
   };
 
   return (
-    <div>
-      <h1>Produk User Page Cindy</h1>
-      <p>Anda sudah login dan dapat mengakses halaman ini</p>
-      <button onClick={handleLogout}>Kembali ke Login</button>
+    <div className="min-h-screen bg-gray-50">
+      <HeroSection onLogout={handleLogout} />
+      <MainSection />
     </div>
   );
 };
