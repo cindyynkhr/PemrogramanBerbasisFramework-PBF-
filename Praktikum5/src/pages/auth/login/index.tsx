@@ -11,7 +11,7 @@ const HalamanLogin = () => {
     };
     return (
         <div className={styles.login}>
-            <h1>Halaman Login</h1>
+            <h1 className="text-3xl font-bold text-blue-600" style={{color: '#3498db'}}>Halaman Login Cindy</h1>
             {/*<button onClick={() => handleLogin("/produk")}>Login ke Produk (Imperatif)</button> <br />
             <button onClick={() => handleLogin("/shop")}>Login ke Shop</button> <br />*/}
             <button onClick={() => handleLogin()}>Login</button><br />
