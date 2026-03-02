@@ -1,4 +1,4 @@
-import { Navbar, Footer } from '../navbar';
+import Navbar from '../navbar';
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -13,7 +13,6 @@ const AppShell = (props: AppShellProps) => {
       <div>
         {children}
       </div>
-      <Footer />
     </main>
   );
 };

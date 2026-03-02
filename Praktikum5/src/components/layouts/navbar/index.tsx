@@ -1,17 +1,11 @@
+import styles from './navbar.module.css';
+
 const Navbar = () => {
   return (
-    <div className="navbar">
-        <div>Navbar Component Cindy</div>
+    <div className={styles.navbar}>
+        <div>Navbar Component Cindyy</div>
     </div>
   );
 };
 
-const Footer = () => {
-  return (
-    <div className="footer">
-      Footer Component @2341720058
-    </div>
-  );
-};
-
-export { Navbar, Footer };
+export default Navbar;
