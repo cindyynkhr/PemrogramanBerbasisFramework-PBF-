@@ -13,6 +13,7 @@ const HalamanLogin = () => {
             {/*<button onClick={() => handleLogin("/produk")}>Login ke Produk (Imperatif)</button> <br />
             <button onClick={() => handleLogin("/shop")}>Login ke Shop</button> <br />*/}
             <button onClick={() => handleLogin()}>Login</button><br />
+            <h1 style={{color:"red",border:"1px solid red",borderRadius:"5px", padding:"5px"}}>Belum Punya Akun</h1>
             <Link href="/auth/register">Login ke Register (Link)</Link>
         </div>
     );
