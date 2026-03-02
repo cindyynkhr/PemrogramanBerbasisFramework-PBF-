@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "@/styles/404.module.scss";
 
 const Custom404 = () => {
@@ -7,6 +8,9 @@ const Custom404 = () => {
             <h1>404</h1>
             <h2>Halaman Tidak Ditemukan</h2>
             <p>Maaf Halaman yang Anda Cari Tidak Ada</p>
+            <Link href="/" className={styles.backButton}>
+                Kembali ke Home
+            </Link>
         </div>
     );
 };  
