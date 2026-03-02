@@ -1,12 +1,43 @@
-.error{
+.error {
     width: 100vw;
-    height:100vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    background: #282c34;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
 
-    &_image{
-        width: 300px;   
+    h1 {
+        font-size: 120px;
+        font-weight: 800;
+        margin: 0;
+        color: #fff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        font-family: 'Arial', sans-serif;
+    }
+
+    h2 {
+        font-size: 32px;
+        font-weight: 600;
+        margin: 0;
+        color: #ffd700;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    p {
+        font-size: 18px;
+        color: #f0f0f0;
+        margin: 0;
+        max-width: 500px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    &_image {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
     }
 }
