@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from './login.module.css';
 
 const halamanLogin = () => {
     const router = useRouter();
@@ -12,7 +13,7 @@ const halamanLogin = () => {
         router.push(destination);
     };
     return (
-        <div>
+        <div className={styles.login}>
             <h1>Halaman Login</h1>
             <button onClick={() => handleLogin("/produk")}>Login ke Produk (Imperatif)</button> <br />
             <button onClick={() => handleLogin("/shop")}>Login ke Shop</button> <br />
