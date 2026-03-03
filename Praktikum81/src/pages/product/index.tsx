@@ -1,0 +1,50 @@
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import TampilanProduk from "@/views/produk";
+
+type ProductType = {
+  id: string;
+  name: string;
+  price: number;
+  images: string;
+  category: string;
+};
+
+const kategori = () => {
+  // const [isLogin, setIsLogin] = useState(false);
+  // const { push } = useRouter();
+
+  const [products, setProducts] = useState<ProductType[]>([]);
+  // console.log("products:", products);
+
+  // useEffect(() => {
+  //   if (!isLogin) {
+  //     push("/auth/login");
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    fetch("/api/produk")
+      .then((response) => response.json())
+      .then((responsedata) => {
+        // Jika API return langsung array
+        // setProducts(responsedata);
+
+        // Jika API return { data: [...] }
+        setProducts(responsedata.data);
+
+        // console.log("Data produk:", responsedata.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching produk:", error);
+      });
+  }, []);
+
+  return (
+    <div>
+      <TampilanProduk products={products} />
+    </div>
+  );
+};
+
+export default kategori;
