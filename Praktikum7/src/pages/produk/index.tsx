@@ -1,40 +1,45 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import HeroSection from "@/views/produk/HeroSection";
-import MainSection from "@/views/produk/MainSection";
+//import HeroSection from "@/views/produk/HeroSection";
+//import MainSection from "@/views/produk/MainSection";
+
+type ProductType= {
+  id: string;
+  nama: string;
+  harga: number;
+  ukuran: string;
+  warna: string;
+};
 
 const Produk = () => {
-  const [isLogin, setIsLogin] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
+  //const [isLogin, setIsLogin] = useState(false);
+  //const {push} = useRouter();
+
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const status = localStorage.getItem("isLogin");
-    if (status === "true") {
-      setIsLogin(true);
-    } else {
-      router.push("/auth/login");
-    }
-    setIsLoading(false);
-  }, [router]);
-
-  if (isLoading) {
-    return <div className="flex items-center justify-center h-screen text-lg">Loading...</div>;
-  }
-
-  if (!isLogin) {
-    return null;
-  }
-
-  const handleLogout = () => {
-    localStorage.removeItem("isLogin");
-    router.push("/auth/login");
-  };
+    fetch("/api/produk")
+      .then((response) => response.json())
+      .then((responsedata) => {
+        //console.log("Data Produk:", responsedata.data);
+        setProducts(responsedata.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <HeroSection onLogout={handleLogout} />
-      <MainSection />
+    <div>
+      <h1>Daftar Produk Cindy</h1>
+      {products.map((product:ProductType) => (
+        <div key={product.id}>
+          <h2>{product.nama}</h2>
+          <p>Harga: {product.harga}</p>
+          <p>Ukuran: {product.ukuran}</p>
+          <p>Warna: {product.warna}</p>   
+        </div>
+      ))}
     </div>
   );
 };
