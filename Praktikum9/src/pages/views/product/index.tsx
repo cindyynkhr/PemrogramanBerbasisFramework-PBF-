@@ -3,7 +3,7 @@ type ProductType = {
     id: string;
     name: string;
     price: number;  
-    image: string;
+    images: string;  // Sesuai dengan Firebase
     category: string;
 };
 
@@ -24,7 +24,7 @@ const TampilanProduk = ({products}: {products: ProductType[]}) => {
                     {products.map((product: ProductType) => (
                         <div key={product.id} className={styles.produk__content__item}>
                             <div className={styles.produk__content__item__image}>
-                                <img src={product.image} alt={product.name} className={styles.produk__content__item__image} />
+                                <img src={product.images} alt={product.name} className={styles.produk__content__item__image} />
                             </div>
                             <h4 className={styles.produk__content__item__name}>
                                 {product.name}
@@ -33,7 +33,7 @@ const TampilanProduk = ({products}: {products: ProductType[]}) => {
                                 {product.category}
                             </p>
                             <p className={styles.produk__content__item__price}>
-                                Rp {product.price.toLocaleString()}
+                                Rp {product.price.toLocaleString('id-ID')}
                             </p>
                         </div>
                     ))}
