@@ -1,50 +1,22 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import TampilanProduk from "@/views/produk";
+import useSWR from "swr";
+import fetcher from "@/pages/utlis/swr/fetcher";
 
-type ProductType = {
-  id: string;
-  name: string;
-  price: number;
-  images: string;
-  category: string;
-};
-
+//const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const kategori = () => {
-  // const [isLogin, setIsLogin] = useState(false);
-  // const { push } = useRouter();
+    // const [isLogin, setIsLogin] = useState(false);
+    // const {push} = useRouter();
+    const [products, setProducts] = useState([]);
 
-  const [products, setProducts] = useState<ProductType[]>([]);
-  // console.log("products:", products);
+    const { data, error,isLoading } = useSWR("/api/produk", fetcher);
 
-  // useEffect(() => {
-  //   if (!isLogin) {
-  //     push("/auth/login");
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    fetch("/api/produk")
-      .then((response) => response.json())
-      .then((responsedata) => {
-        // Jika API return langsung array
-        // setProducts(responsedata);
-
-        // Jika API return { data: [...] }
-        setProducts(responsedata.data);
-
-        // console.log("Data produk:", responsedata.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching produk:", error);
-      });
-  }, []);
-
-  return (
-    <div>
-      <TampilanProduk products={products} />
-    </div>
-  );
-};
+    return(
+        <div>
+            <TampilanProduk products={data ? data.data : []} />
+        </div>
+    )
+}
 
 export default kategori;
