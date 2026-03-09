@@ -3,23 +3,26 @@ import fetcher from "@/utils/swr/fetcher";
 import useSWR from "swr";
 import { use } from "react";
 import DetailProduk from "@/views/detailProduct";
+import { ProductType } from "@/types/product.type";
 
-const HalamanProduk = () => {
-    //const Router = useRouter();
-    //console.log(Router);
-    const { query } = useRouter();
-    const { data, error, isLoading } = useSWR(`/api/produk/${query.produk}`,fetcher);
-    
-    if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error loading product</div>;
-    if (!data?.data) return <div>Product not found</div>;
-    
+const HalamanProduk = ({ product }: { product: ProductType }) => {
     return (
         <div>
-            <DetailProduk product={data.data} />
+            <DetailProduk product={product} />
         </div>
     );  
 };
 
 export default HalamanProduk;
+
+export async function getServerSideProps({ params }: { params: { produk: string } }) {
+    const res = await fetch(`http://localhost:3000/api/produk/${params?.produk}`);
+    const response = await res.json();
+    // console.log("Data produk yang diambil dari API:", response);
+    return {
+        props: {
+            product: response.data,
+        },
+    };
+}
 
