@@ -14,22 +14,13 @@ const halamanProdukStatic = (props:({products: ProductType[]})) => {
 export default halamanProdukStatic;
 
 export async function getServerSideProps() {
-    try {
-        const res = await fetch("http://localhost:3000/api/produk");
-        if (!res.ok) throw new Error("API response not ok");
-        const data = await res.json();
-
-        return {
-            props: {
-                products: data?.data || [],
-            },
-        };
-    } catch (error) {
-        console.error("Error fetching products:", error);
-        return {
-            props: {
-                products: [],
-            },
-        };
-    }
+    const res = await fetch('https://127.0.0.1:3000/api/produk');
+    //const responese: ProducType[] = await res.json();
+    const response: { data: ProductType[] } = await res.json();
+    return {
+        props: {
+            products: response.data,
+        },
+        revalidate: 10, // Revalidate every 10 seconds
+    };
 }
