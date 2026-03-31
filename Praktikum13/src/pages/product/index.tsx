@@ -7,14 +7,15 @@ import fetcher from "../../utils/swr/fetcher";
 // const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const kategori = () => {
     // const [isLogin, setIsLogin] = useState(false);
-    // const {push} = useRouter();
+    const {push} = useRouter();
     const [products, setProducts] = useState([]);
 
     const { data, error,isLoading } = useSWR("/api/produk", fetcher);
+    //Cek apakah data, error, dan isLoading sudah benar....
 
     return(
         <div>
-            <TampilanProduk products={data ? data.data : []} />
+            <TampilanProduk products={isLoading ? [] :data.data} />
         </div>
     )
 }
