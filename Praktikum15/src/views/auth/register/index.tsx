@@ -2,6 +2,7 @@ import Link from 'next/link';
 import style from './register.module.scss';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { error } from 'node:console';
 
 const tampilanRegister = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -30,13 +31,14 @@ const tampilanRegister = () => {
         } else {
             setIsLoading(false);
             setEror(
-                response.status === 400 ? "User already exists" : "An error occurred"
+                response.status === 400 ? "Email already exists" : "An error occurred"
             );
         }
     };
 
     return (
         <div className={style.register}>
+                {eror && <p className={style.register_form_item_error}>{eror}</p>}
             <h1 className={style.register_title}>Halaman Register</h1>
             <div className={style.register_form}>
                 <form action="" onSubmit={handleSubmit}>
@@ -103,7 +105,6 @@ const tampilanRegister = () => {
                         type="submit" 
                         className={style.register_form_item_button}
                         disabled={isLoading}
-                        style={{ opacity: isLoading ? 0.6 : 1, cursor: isLoading ? "not-allowed" : "pointer" }}
                     >
                         {isLoading ? "Loading..." : "Register"}
                     </button>

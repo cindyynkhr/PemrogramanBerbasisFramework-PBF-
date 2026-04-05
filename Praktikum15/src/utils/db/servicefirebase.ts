@@ -10,6 +10,8 @@ import {
   where, 
 } from "firebase/firestore";
 import app from "./firebase";
+import bcrypt from "bcrypt";
+import { use } from "react";
 
 const db = getFirestore(app);
 
@@ -33,6 +35,7 @@ export async function signUp(
     email: string;
     fullName: string;
     password: string;
+    role?: string;
   },
   callback: Function,
 ){
@@ -55,10 +58,12 @@ export async function signUp(
       });
     } else {
       // User doesn't exist, add to database
+      const hashedPassword = await bcrypt.hash(UserData.password, 10);
       await addDoc(collection(db, "users"), {
         email: UserData.email,
         fullName: UserData.fullName,
-        password: UserData.password,
+        password: hashedPassword,
+        role: "user",
         createdAt: new Date(),
       });
       callback({
