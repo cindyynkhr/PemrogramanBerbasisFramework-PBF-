@@ -1,15 +1,31 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export function middleware(request: NextRequest) {
-    const token = request.cookies.get("next-auth.session-token");
-    if (token) {
-        return NextResponse.next();
-    } else {
+export async function middleware(request: NextRequest) {
+    const pathname = request.nextUrl.pathname;
+    const hanyaAdmin = ["/product", "/admin", "/setting/app"]; // Path hanya untuk admin
+    
+    const token: any = await getToken({
+        req: request,
+        secret: process.env.NEXTAUTH_SECRET,
+    });
+    
+    // Jika belum login sama sekali
+    if (!token) {
+        const loginUrl = new URL("/auth/login", request.url);
+        loginUrl.searchParams.set("callbackUrl", pathname);
+        return NextResponse.redirect(loginUrl);
+    }
+    
+    // Jika sudah login tapi bukan admin dan path hanya untuk admin
+    if (hanyaAdmin.includes(pathname) && token.role !== "admin") {
         return NextResponse.redirect(new URL("/", request.url));
     }
+    
+    return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/product", "/about", "/profile"],
+    matcher: ["/product", "/about", "/profile", "/admin", "/setting/app"],
 };
