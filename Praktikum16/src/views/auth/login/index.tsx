@@ -39,65 +39,67 @@ const tampilanLogin = () => {
 
 
     return (
-        <div className={style.login}>
-                {eror && <p className={style.login_form_item_error}>{eror}</p>}
-            <h1 className={style.login_title}>Halaman login</h1>
-            <div className={style.login_form}>
-                <form action="" onSubmit={handleSubmit}>
-                    {eror && (
-                        <div style={{ color: "#d32f2f", fontSize: "14px", marginBottom: "15px", textAlign: "center", padding: "10px", backgroundColor: "#ffebee", borderRadius: "5px" }}>
-                            {eror}
+        <>
+            <div className={style.login}>
+                    {eror && <p className={style.login_form_item_error}>{eror}</p>}
+                <h1 className={style.login_title}>Halaman login</h1>
+                <div className={style.login_form}>
+                    <form action="" onSubmit={handleSubmit}>
+                        {eror && (
+                            <div style={{ color: "#d32f2f", fontSize: "14px", marginBottom: "15px", textAlign: "center", padding: "10px", backgroundColor: "#ffebee", borderRadius: "5px" }}>
+                                {eror}
+                            </div>
+                        )}
+                        {/* Form Email */}
+                        <div className={style.login_form_item}>
+                            <label
+                                htmlFor="email"
+                                className={style.login_form_item_label}
+                            >
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Cindy@example.com"
+                                className={style.login_form_item_input}
+                                required
+                            />
                         </div>
-                    )}
-                    {/* Form Email */}
-                    <div className={style.login_form_item}>
-                        <label
-                            htmlFor="email"
-                            className={style.login_form_item_label}
-                        >
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Cindy@example.com"
-                            className={style.login_form_item_input}
-                            required
-                        />
-                    </div>
 
-                    {/* Form Password */}
-                    <div className={style.login_form_item}>
-                        <label
-                            htmlFor="password"
-                            className={style.login_form_item_label}
-                        >
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Password"
-                            className={style.login_form_item_input}
-                            required
-                        />
-                    </div>
+                        {/* Form Password */}
+                        <div className={style.login_form_item}>
+                            <label
+                                htmlFor="password"
+                                className={style.login_form_item_label}
+                            >
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                className={style.login_form_item_input}
+                                required
+                            />
+                        </div>
 
-                    <button 
-                        type="submit" 
-                        className={style.login_form_item_button}
-                        disabled={isLoading}
-                    >
-                        {isLoading ? "Loading..." : "login"}
-                    </button>
-                </form>
-                <p className={style.login_form_item_text}>
-                    Sudah punya akun? <Link href="/auth/register">Ke Halaman Register</Link>
-                </p>
+                        <button 
+                            type="submit" 
+                            className={style.login_form_item_button}
+                            disabled={isLoading}
+                        >
+                            {isLoading ? "Loading..." : "login"}
+                        </button>
+                    </form>
+                    <p className={style.login_form_item_text}>
+                        Sudah punya akun? <Link href="/auth/register">Ke Halaman Register</Link>
+                    </p>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

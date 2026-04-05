@@ -4,7 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 const Navbar = () => {
     const {data}:any = useSession();
     //const { data: sesion } = useSession();
-    //console.log("session", sesion);
+    console.log("session", data);
     return (
         <div className={styles.navbar}>
             <div className={styles.navbar_brand}>
@@ -14,7 +14,7 @@ const Navbar = () => {
                 {data ? (
                     <>
                     <div className={styles.navbar_user}>
-                        Welcome, {data.user.fullname}
+                        Welcome, {data.user.fullName}
                     </div>
                     <button 
                         className={styles.navbar_button + " " + styles["navbar_button--danger"]}
