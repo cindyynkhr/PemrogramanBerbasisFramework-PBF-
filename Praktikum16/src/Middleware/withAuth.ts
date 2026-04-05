@@ -6,14 +6,19 @@ export default function withAuth(
     requireAuth: string[] = [],
 ){
     return async (req: NextRequest, next: NextFetchEvent) => {
-        const token = await getToken({
-            req,
-            secret: process.env.NEXTAUTH_SECRET,
-        });
-        if (!token) {
-            const loginUrl = new URL("/login", req.url);
-            return NextResponse.redirect(loginUrl);
+        const pathname = req.nextUrl.pathname;
+        
+        if (requireAuth.includes(pathname)) {
+            const token = await getToken({
+                req,
+                secret: process.env.NEXTAUTH_SECRET,
+            });
+            if (!token) {
+                const loginUrl = new URL("/login", req.url);
+                loginUrl.searchParams.set("callbackUrl", encodeURI(req.url));
+                return NextResponse.redirect(loginUrl);
+            }
+            return middleware(req, next);
         }
-        return middleware(req, next);
     }
 }
