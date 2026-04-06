@@ -3,6 +3,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import googleProvider from "next-auth/providers/google";
+import githubProvider from "next-auth/providers/github";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -44,6 +45,11 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
 
+    githubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID || "",
+      clientSecret: process.env.GITHUB_CLIENT_SECRET || "",
+    }),
+
   ],
   callbacks: {
     async jwt({ token, account, profile, user }: any) {
@@ -52,8 +58,10 @@ export const authOptions: NextAuthOptions = {
         token.fullName = user.fullName;
         token.role = user.role;
       }
-      //Jika login dengan Google, tambahkan informasi yang diperlukan ke token
-      if(account?.provider === "google") {
+
+      // Handle OAuth providers (Google, GitHub)
+      const oauthProviders = ["google", "github"];
+      if (account && oauthProviders.includes(account.provider)) {
         const data = {
           fullName: user.name,
           email: user.email,

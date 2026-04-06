@@ -99,6 +99,13 @@ const tampilanLogin = () => {
                             disabled={isLoading}
                         >
                             {isLoading ? "Loading..." : "Login with Google"}
+                        </button> {" "}
+                        <button
+                            onClick={() => signIn("github", { callbackUrl, redirect: false })}
+                            className={style.login_form_item_button}
+                            disabled={isLoading}
+                        >
+                            {isLoading ? "Loading..." : "Login with GitHub"}
                         </button>
                     </form>
                     <p className={style.login_form_item_text}>
