@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ProductType } from "@/types/product.type";
 import styles from "./detailProduct.module.scss";
 
@@ -11,7 +12,7 @@ const DetailProduk = ({product}: {product: ProductType}) => {
         <h1 className={styles.title}>Detail Produk</h1>
             <div className={styles.produkdetail}>
                 <div className={styles.produkdetail_image}>
-                    <img src={product.images && product.images} alt={product.name} />
+                    <Image src={product.images} alt={product.name} width={400} height={400} style={{objectFit: 'cover', width: '100%', height: 'auto'}} priority />
                 </div>
 
             <div className={styles.produkdetail_info}>

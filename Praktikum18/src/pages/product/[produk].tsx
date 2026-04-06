@@ -2,9 +2,13 @@ import { useRouter } from "next/router";
 import fetcher from "@/utils/swr/fetcher";
 import useSWR from "swr";
 import { use } from "react";
-import DetailProduk from "@/views/detailProduct";
+import dynamic from "next/dynamic";
 import { ProductType } from "@/types/product.type";
 import { retrieveProducts, retrieveDataByID } from "@/utils/db/servicefirebase";
+
+const DetailProduk = dynamic(() => import("@/views/detailProduct"), {
+    loading: () => <p>Loading detail produk...</p>,
+});
 
 const HalamanProduk = ({product}: {product: ProductType}) => {
     // digunakan client-side rendering
