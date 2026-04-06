@@ -92,6 +92,13 @@ const tampilanLogin = () => {
                             disabled={isLoading}
                         >
                             {isLoading ? "Loading..." : "login"}
+                        </button> {" "}
+                        <button
+                            onClick={() => signIn("google", { callbackUrl, redirect: false })}
+                            className={style.login_form_item_button}
+                            disabled={isLoading}
+                        >
+                            {isLoading ? "Loading..." : "Login with Google"}
                         </button>
                     </form>
                     <p className={style.login_form_item_text}>
