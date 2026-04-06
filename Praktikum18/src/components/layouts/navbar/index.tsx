@@ -25,8 +25,7 @@ const Navbar = () => {
                             <Image 
                                 src={data.user.image}
                                 alt={data.user.fullName}
-                                width={42}
-                                height={42}
+                                width={50} height={50}
                                 className={styles.navbar_user_image}
                             />
                         )}
