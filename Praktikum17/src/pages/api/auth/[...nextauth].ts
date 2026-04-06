@@ -2,6 +2,7 @@ import { signIn } from "@/utils/db/servicefirebase";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
+import googleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -37,6 +38,12 @@ export const authOptions: NextAuthOptions = {
           return null;
       },
     }),
+
+    googleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
+
   ],
   callbacks: {
     async jwt({ token, account, profile, user }: any) {
@@ -44,6 +51,20 @@ export const authOptions: NextAuthOptions = {
         token.email = user.email;
         token.fullName = user.fullName;
         token.role = user.role;
+      }
+      //Jika login dengan Google, tambahkan informasi yang diperlukan ke token
+      if(account?.provider === "google" && profile) {
+        const data = {
+          fullName: user.name,
+          email: user.email,
+          image: user.image,
+          type: account.provider,
+        };
+        token.fullName = data.fullName;
+        token.email = data.email;
+        token.image = data.image;
+        token.type = data.type;
+
       }
       return token;
     },
@@ -54,7 +75,9 @@ export const authOptions: NextAuthOptions = {
 
         session.user.email = token.email;
         session.user.fullName = token.fullName;
+        session.user.image = token.image;
         session.user.role = token.role;
+        session.user.type = token.type;
 
         return session;
     },
