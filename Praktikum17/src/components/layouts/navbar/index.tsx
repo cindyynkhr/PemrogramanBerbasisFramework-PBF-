@@ -15,6 +15,13 @@ const Navbar = () => {
                     <>
                     <div className={styles.navbar_user}>
                         Welcome, {data.user.fullName}
+                        {data.user.image && (
+                            <img 
+                                src={data.user.image}
+                                alt={data.user.fullName}
+                                className={styles.navbar_user_image}
+                            />
+                        )}
                     </div>
                     <button 
                         className={styles.navbar_button + " " + styles["navbar_button--danger"]}
